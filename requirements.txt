@@ -1,0 +1,17 @@
+# --- ingestion ---
+websockets          # WebSocket client to receive the Bluesky stream
+# --- storage & transformation ---
+duckdb              # SQL engine that queries JSON/Parquet files directly
+pandas              # DataFrames (DuckDB returns query results as pandas)
+pyarrow             # Parquet read/write engine
+numpy               # numerical arrays (vectors are numpy arrays)
+# --- ML / NLP ---
+sentence-transformers  # embedding models; pulls in PyTorch (~200+ MB) and transformers
+transformers        # Hugging Face models (sentiment)
+umap-learn          # dimensionality reduction before clustering
+scikit-learn        # HDBSCAN clustering, TF-IDF keywords
+# --- vector DB ---
+qdrant-client       # Python client for Qdrant
+# --- app & quality ---
+streamlit           # dashboard
+pytest              # tests
