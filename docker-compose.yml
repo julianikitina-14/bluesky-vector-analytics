@@ -1,0 +1,13 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.20.0   # pinned for reproducibility
+    container_name: qdrant
+    ports:
+      - "6333:6333"   # REST API + web dashboard
+      - "6334:6334"   # gRPC API (faster binary protocol, optional)
+    volumes:
+      - qdrant_data:/qdrant/storage   # named volume: data survives container restarts
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
