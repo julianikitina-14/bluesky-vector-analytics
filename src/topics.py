@@ -41,7 +41,9 @@ def topic_keywords(df: pd.DataFrame, top_n: int = 8) -> dict[int, str]:
 
 def representative_posts(df: pd.DataFrame, X: np.ndarray, n: int = 3) -> dict[int, list[str]]:
     reps = {}
-    for tid, idx in df[df.topic_id >= 0].groupby("topic_id").indices.items():
+    for tid, idx in df.groupby("topic_id").indices.items():  # positions in the FULL df, matching X
+        if tid < 0:
+            continue  # -1 = noise, not a topic
         centroid = X[idx].mean(axis=0)
         closest = idx[np.argsort(X[idx] @ centroid)[::-1][:n]]
         reps[int(tid)] = df["clean_text"].iloc[closest].tolist()
